@@ -20,25 +20,30 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 <h2>High-Level Deployment and Configuration Steps</h2>
 
-- Step 1: Install active directory
-- Step 2: Create a Domain Admin user within the domain
-- Step 3: Join another "client" to your domain (mydomain.com)
-- Step 4: Setup Remote Desktop for non-administrative users on "client"
+- Step 1: Setting up your DC(Domain Controller) and Client.
+- Step 2: Install active directory
+- Step 3: Create a Domain Admin user within the domain
+- Step 4: Join another "client" to your domain (mydomain.com)
+- Step 5: Setup Remote Desktop for non-administrative users on "client"
 - Additional Step: Create a bunch of additional users and attempt to log into "client" with one of the users
 
-<h2>installing Active Directory to DC.</h2>
+<h2>Step 1: Setting up your DC(Domain Controller) and Client..</h2>
 Beforehand I created 2 VM's on Azure.
   The first VM I created DC labeled "DC-1" with Windows Server 2022, Region: EAST-US-2, and ip set to static (10.0.0.4).
 <img src="https://i.imgur.com/mBawTuI.png" height="80%" width="80%" alt="DC-1 Configuratuon"/>
   The second VM I created was a client VM named "Client-1" with windows 10, Region: EAST-US-2, and DNS server set to the same as DC-1 ip address (10.0.0.4).
 <img src="https://i.imgur.com/CKFw1hf.png" height="80%" width="80%" alt="Client-1 Configuration"/>
+  
+<h2>Step 2: Install active directory.</h2>
+Login to DC-1 and install Active Directory Domain Services.
+You can do this buy clicking  "add roles and features" shown here. 
+(Leave everything else as default except for "server roles" as you install AD as shown.)
+<img src="https://i.imgur.com/aqTRD1b.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+Afterwards you can promote the server as a DC.
+<img src="https://i.imgur.com/vVS7GzR.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+Then setup your forest. Choose any name you want just make sure to remember it. Afterwards we will restart server and log back to the VM with the new forest followed by the user. (ex. mydomain.com\labuser) is mine.
+<img src="https://i.imgur.com/9lAc6Qy.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
-<h2>installing Active Directory to DC.</h2>
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
 Beforehand I created 2 VM's on Azure. I
 </p>
 <br />
