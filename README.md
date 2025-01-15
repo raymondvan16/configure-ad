@@ -44,22 +44,17 @@ Afterwards you can promote the server as a DC.
 Then setup your forest. Choose any name you want just make sure to remember it. Afterwards we will restart server and log back to the VM with the new forest followed by the user. (ex. mydomain.com\labuser) is mine.
 <img src="https://i.imgur.com/9lAc6Qy.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
-Beforehand I created 2 VM's on Azure. I
-</p>
+<h2>Step 3: Create a Domain Admin user within the domain.</h2>
+-Once you log back to the same VM using the new forest, in the windows search bar search up "Active Directory Users and Computers" and launch it.
+-Under the forest selection, right click-> new-> Organizational unit, create an OU named "_EMPLOYEES".
+-Repeat again and this time create "_ADMINS"
+<img src="https://i.imgur.com/r7bANHh.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+Now under "_EMPLOYEES" right click-> new -> Users and create a new users. In this lab:
+Jane Doe
+"jane_Admin"/ Cyberlab123! (username/password)
+Uncheck user must change password on next logon.
+<img src="https://i.imgur.com/7atfoze.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+Now under "_EMPLOYEES" right click Jane Doe -> Properties -> Member of -> Add... -> type "Domain Admins" and add Jane to Domain Admins.
+Log out / close the connection to DC-1 and log back in as “mydomain.com\jane_admin”.
+User jane_admin as your admin account from now on.
