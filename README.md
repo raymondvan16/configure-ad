@@ -25,7 +25,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 - Step 3: Create a Domain Admin user within the domain
 - Step 4: Join another "client" to your domain (mydomain.com)
 - Step 5: Setup Remote Desktop for non-administrative users on "client"
-- Additional Step: Create a bunch of additional users and attempt to log into "client" with one of the users
+- step 6: Create a bunch of additional users and attempt to log into "client" with one of the users
 
 <h2>Step 1: Setting up your DC(Domain Controller) and Client..</h2>
 Beforehand I created 2 VM's on Azure.
@@ -58,3 +58,30 @@ Uncheck user must change password on next logon.
 Now under "_EMPLOYEES" right click Jane Doe -> Properties -> Member of -> Add... -> type "Domain Admins" and add Jane to Domain Admins.
 Log out / close the connection to DC-1 and log back in as “mydomain.com\jane_admin”.
 User jane_admin as your admin account from now on.
+
+<h2>Step 4: Join another "client" to your domain (mydomain.com)</h2>
+-Log into the client VM under original account. 
+-right click start menu -> system -> "Rename this PC" (advanced) -> Computer name tag click "change" -> Member of- Domain: "mydomain.com"
+<img src="https://i.imgur.com/9H8y0MN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+-When prompted login, log into "mydomain.com\jane_admin" and select restart.
+-Once restarted, it will be a member of the domain.
+-Log into DC, verify that Client is in ADUC by
+  search "Active Directory Users and Computers" -> expand "mydomain.com" -> "computers" -> verify client is in.
+
+<h2>Step 5: Setup Remote Desktop for non-administrative users on "client"</h2>
+-Log into Client-1 as mydomain.com\jane_admin
+-Open system properties -> Click “Remote Desktop” -> Select users that can remotely access this PC. -> Allow “domain users” access to remote desktop
+<img src="https://i.imgur.com/PDZbpIp.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+-You can now log into Client-1 as a normal, non-administrative user now
+
+<h2>step 6: Create a bunch of additional users and attempt to log into "client" with one of the users"</h2>
+-Login to DC-1 as jane_admin
+-Open PowerShell_ise as an administrator
+-Create a new File and paste the contents of the script down below into it
+https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1
+-Run the script and observe the accounts being created
+<img src="https://i.imgur.com/X47nVAX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+-When finished, open ADUC and observe the accounts in the appropriate OU　(_EMPLOYEES)
+-Attempt to log into Client-1 with one of the accounts (take note of the password in the script)
+
+End of Lab.
